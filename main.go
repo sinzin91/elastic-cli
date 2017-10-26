@@ -13,6 +13,8 @@ import (
 )
 
 func main() {
+	var port string
+
 	app := cli.NewApp()
 
 	app.Flags = []cli.Flag{
@@ -20,6 +22,12 @@ func main() {
 			Name:  "lang",
 			Value: "english",
 			Usage: "language for the greeting",
+		},
+		cli.StringFlag{
+			Name:        "port",
+			Value:       "9200",
+			Usage:       "port that Elasticsearch is listening on",
+			Destination: &port,
 		},
 	}
 
@@ -46,7 +54,9 @@ func main() {
 			Aliases: []string{"h"},
 			Usage:   "get cluster health",
 			Action: func(c *cli.Context) error {
-				fmt.Println(getJSON("http://localhost:9200/_cluster/health"))
+				query := cmdCluster(c, port, "health")
+				fmt.Println(query)
+				fmt.Println(getJSON(query))
 				return nil
 			},
 		},
@@ -83,4 +93,20 @@ func getJSON(route string) (string, error) {
 	}
 	out, err := prettyjson.Marshal(b)
 	return string(out), err
+}
+
+func cmdCluster(c *cli.Context, port string, subCmd string) string {
+	route := "/_cluster"
+	url := "http://localhost:"
+
+	var arg string
+	switch subCmd {
+	case "health":
+		arg = "/health"
+	case "state":
+		arg = "/state"
+	default:
+		arg = ""
+	}
+	return url + port + route + arg
 }
