@@ -100,6 +100,17 @@ func main() {
 						return nil
 					},
 				},
+				{
+					Name:    "shards",
+					Aliases: []string{"sh"},
+					Usage:   "get shards",
+					Action: func(c *cli.Context) error {
+						query := cmdCat(c, port, "shards")
+						fmt.Print(query + "\n")
+						fmt.Println(getRaw(query))
+						return nil
+					},
+				},
 			},
 		},
 	}
@@ -175,7 +186,9 @@ func cmdCat(c *cli.Context, port string, subCmd string) string {
 	var arg string
 	switch subCmd {
 	case "allocation":
-		arg = "/allocation?v"
+		arg = "/allocation"
+	case "shards":
+		arg = "/shards"
 	}
-	return url + port + route + arg
+	return url + port + route + arg + "?v"
 }
