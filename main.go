@@ -133,6 +133,21 @@ func main() {
 						return nil
 					},
 				},
+				{
+					Name:    "indices",
+					Aliases: []string{"i"},
+					Usage:   "get indices",
+					Action: func(c *cli.Context) error {
+						index := ""
+						if c.Args().Get(0) != "" {
+							index = c.Args().Get(0)
+						}
+						query := cmdCat(c, port, "indices", index)
+						fmt.Print(query + "\n")
+						fmt.Println(getRaw(query))
+						return nil
+					},
+				},
 			},
 		},
 	}
