@@ -83,6 +83,8 @@ func cmdCat(c *cli.Context, port string, subCmd string, index string) string {
 		arg = "/allocation"
 	case "shards":
 		arg = "/shards/"
+	case "master":
+		arg = "/master"
 	}
 	return url + port + route + arg + index + "?v"
 }

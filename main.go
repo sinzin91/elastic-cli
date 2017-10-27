@@ -109,6 +109,18 @@ func main() {
 						return nil
 					},
 				},
+				{
+					Name:    "master",
+					Aliases: []string{"m"},
+					Usage:   "get master",
+					Action: func(c *cli.Context) error {
+						index := ""
+						query := cmdCat(c, port, "master", index)
+						fmt.Print(query + "\n")
+						fmt.Println(getRaw(query))
+						return nil
+					},
+				},
 			},
 		},
 	}
