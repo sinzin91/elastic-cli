@@ -73,7 +73,7 @@ func cmdCluster(c *cli.Context, port string, subCmd string) string {
 	return url + port + route + arg
 }
 
-func cmdCat(c *cli.Context, port string, subCmd string) string {
+func cmdCat(c *cli.Context, port string, subCmd string, index string) string {
 	route := "/_cat"
 	url := c.GlobalString("baseurl")
 
@@ -82,7 +82,7 @@ func cmdCat(c *cli.Context, port string, subCmd string) string {
 	case "allocation":
 		arg = "/allocation"
 	case "shards":
-		arg = "/shards"
+		arg = "/shards/"
 	}
-	return url + port + route + arg + "?v"
+	return url + port + route + arg + index + "?v"
 }

@@ -88,7 +88,7 @@ func main() {
 					Aliases: []string{"al"},
 					Usage:   "get allocation",
 					Action: func(c *cli.Context) error {
-						query := cmdCat(c, port, "allocation")
+						query := cmdCat(c, port, "allocation", "")
 						fmt.Print(query + "\n")
 						fmt.Println(getRaw(query))
 						return nil
@@ -97,9 +97,13 @@ func main() {
 				{
 					Name:    "shards",
 					Aliases: []string{"sh"},
-					Usage:   "get shards",
+					Usage:   "get shards (optionally by index)",
 					Action: func(c *cli.Context) error {
-						query := cmdCat(c, port, "shards")
+						index := ""
+						if c.Args().Get(0) != "" {
+							index = c.Args().Get(0)
+						}
+						query := cmdCat(c, port, "shards", index)
 						fmt.Print(query + "\n")
 						fmt.Println(getRaw(query))
 						return nil
