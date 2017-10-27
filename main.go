@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"io/ioutil"
 	"mime"
 	"net/http"
 	"os"
@@ -22,6 +23,11 @@ func main() {
 			Name:  "lang",
 			Value: "english",
 			Usage: "language for the greeting",
+		},
+		cli.StringFlag{
+			Name:  "baseurl",
+			Value: "http://localhost:",
+			Usage: "Base API URL",
 		},
 		cli.StringFlag{
 			Name:        "port",
@@ -50,25 +56,50 @@ func main() {
 			},
 		},
 		{
-			Name:    "health",
-			Aliases: []string{"h"},
-			Usage:   "get cluster health",
-			Action: func(c *cli.Context) error {
-				query := cmdCluster(c, port, "health")
-				fmt.Println(query)
-				fmt.Println(getJSON(query))
-				return nil
+			Name:      "cluster",
+			ShortName: "cl",
+			Usage:     "Get cluster information",
+			Subcommands: []cli.Command{
+				{
+					Name:    "health",
+					Aliases: []string{"he"},
+					Usage:   "get cluster health",
+					Action: func(c *cli.Context) error {
+						query := cmdCluster(c, port, "health")
+						fmt.Println(query)
+						fmt.Println(getJSON(query))
+						return nil
+					},
+				},
+				{
+					Name:    "state",
+					Aliases: []string{"s"},
+					Usage:   "get cluster state",
+					Action: func(c *cli.Context) error {
+						query := cmdCluster(c, port, "state")
+						fmt.Println(query)
+						fmt.Println(getJSON(query))
+						return nil
+					},
+				},
 			},
 		},
 		{
-			Name:    "state",
-			Aliases: []string{"h"},
-			Usage:   "get cluster state",
-			Action: func(c *cli.Context) error {
-				query := cmdCluster(c, port, "state")
-				fmt.Println(query)
-				fmt.Println(getJSON(query))
-				return nil
+			Name:      "cat",
+			ShortName: "c",
+			Usage:     "Call cat API",
+			Subcommands: []cli.Command{
+				{
+					Name:    "allocation",
+					Aliases: []string{"al"},
+					Usage:   "get allocation",
+					Action: func(c *cli.Context) error {
+						query := cmdCat(c, port, "allocation")
+						fmt.Print(query + "\n")
+						fmt.Println(getRaw(query))
+						return nil
+					},
+				},
 			},
 		},
 	}
@@ -106,6 +137,21 @@ func getJSON(route string) (string, error) {
 	return string(out), err
 }
 
+func getRaw(route string) (string, error) {
+	r, err := http.Get(route)
+	if err != nil {
+		return "", err
+	}
+	defer r.Body.Close()
+
+	if r.StatusCode != 200 {
+		return "", fmt.Errorf("unexpected status code: %s", r.Status)
+	}
+
+	out, err := ioutil.ReadAll(r.Body)
+	return string(out), err
+}
+
 func cmdCluster(c *cli.Context, port string, subCmd string) string {
 	route := "/_cluster"
 	url := "http://localhost:"
@@ -118,6 +164,18 @@ func cmdCluster(c *cli.Context, port string, subCmd string) string {
 		arg = "/state"
 	default:
 		arg = ""
+	}
+	return url + port + route + arg
+}
+
+func cmdCat(c *cli.Context, port string, subCmd string) string {
+	route := "/_cat"
+	url := c.GlobalString("baseurl")
+
+	var arg string
+	switch subCmd {
+	case "allocation":
+		arg = "/allocation?v"
 	}
 	return url + port + route + arg
 }
