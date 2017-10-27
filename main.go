@@ -60,6 +60,17 @@ func main() {
 				return nil
 			},
 		},
+		{
+			Name:    "state",
+			Aliases: []string{"h"},
+			Usage:   "get cluster state",
+			Action: func(c *cli.Context) error {
+				query := cmdCluster(c, port, "state")
+				fmt.Println(query)
+				fmt.Println(getJSON(query))
+				return nil
+			},
+		},
 	}
 
 	app.Run(os.Args)
