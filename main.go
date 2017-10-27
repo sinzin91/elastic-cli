@@ -121,6 +121,18 @@ func main() {
 						return nil
 					},
 				},
+				{
+					Name:    "nodes",
+					Aliases: []string{"n"},
+					Usage:   "get nodes",
+					Action: func(c *cli.Context) error {
+						index := ""
+						query := cmdCat(c, port, "nodes", index)
+						fmt.Print(query + "\n")
+						fmt.Println(getRaw(query))
+						return nil
+					},
+				},
 			},
 		},
 	}
