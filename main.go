@@ -148,6 +148,21 @@ func main() {
 						return nil
 					},
 				},
+				{
+					Name:    "segments",
+					Aliases: []string{"s"},
+					Usage:   "get segments",
+					Action: func(c *cli.Context) error {
+						index := ""
+						if c.Args().Get(0) != "" {
+							index = c.Args().Get(0)
+						}
+						query := cmdCat(c, port, "segments", index)
+						fmt.Print(query + "\n")
+						fmt.Println(getRaw(query))
+						return nil
+					},
+				},
 			},
 		},
 	}
