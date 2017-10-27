@@ -163,6 +163,21 @@ func main() {
 						return nil
 					},
 				},
+				{
+					Name:    "count",
+					Aliases: []string{"c"},
+					Usage:   "get count",
+					Action: func(c *cli.Context) error {
+						index := ""
+						if c.Args().Get(0) != "" {
+							index = c.Args().Get(0)
+						}
+						query := cmdCat(c, port, "count", index)
+						fmt.Print(query + "\n")
+						fmt.Println(getRaw(query))
+						return nil
+					},
+				},
 			},
 		},
 	}

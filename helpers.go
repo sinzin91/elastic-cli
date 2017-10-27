@@ -91,6 +91,8 @@ func cmdCat(c *cli.Context, port string, subCmd string, index string) string {
 		arg = "/indices/"
 	case "segments":
 		arg = "/segments/"
+	case "count":
+		arg = "/count/"
 	}
 	return url + port + route + arg + index + "?v"
 }
