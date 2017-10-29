@@ -136,7 +136,7 @@ func main() {
 				{
 					Name:    "indices",
 					Aliases: []string{"i"},
-					Usage:   "get indices",
+					Usage:   "get indices (optionally by index)",
 					Action: func(c *cli.Context) error {
 						index := ""
 						if c.Args().Get(0) != "" {
@@ -151,7 +151,7 @@ func main() {
 				{
 					Name:    "segments",
 					Aliases: []string{"s"},
-					Usage:   "get segments",
+					Usage:   "get segments (optionally by index)",
 					Action: func(c *cli.Context) error {
 						index := ""
 						if c.Args().Get(0) != "" {
@@ -166,13 +166,40 @@ func main() {
 				{
 					Name:    "count",
 					Aliases: []string{"c"},
-					Usage:   "get count",
+					Usage:   "get count (optionally by index)",
 					Action: func(c *cli.Context) error {
 						index := ""
 						if c.Args().Get(0) != "" {
 							index = c.Args().Get(0)
 						}
 						query := cmdCat(c, port, "count", index)
+						fmt.Print(query + "\n")
+						fmt.Println(getRaw(query))
+						return nil
+					},
+				},
+				{
+					Name:    "recovery",
+					Aliases: []string{"r"},
+					Usage:   "get recovery (optionally by index)",
+					Action: func(c *cli.Context) error {
+						index := ""
+						if c.Args().Get(0) != "" {
+							index = c.Args().Get(0)
+						}
+						query := cmdCat(c, port, "recovery", index)
+						fmt.Print(query + "\n")
+						fmt.Println(getRaw(query))
+						return nil
+					},
+				},
+				{
+					Name:    "health",
+					Aliases: []string{"he"},
+					Usage:   "get health",
+					Action: func(c *cli.Context) error {
+						index := ""
+						query := cmdCat(c, port, "health", index)
 						fmt.Print(query + "\n")
 						fmt.Println(getRaw(query))
 						return nil
