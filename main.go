@@ -205,6 +205,33 @@ func main() {
 						return nil
 					},
 				},
+				{
+					Name:    "pending_tasks",
+					Aliases: []string{"pt"},
+					Usage:   "get pending_tasks",
+					Action: func(c *cli.Context) error {
+						index := ""
+						query := cmdCat(c, port, "pending_tasks", index)
+						fmt.Print(query + "\n")
+						fmt.Println(getRaw(query))
+						return nil
+					},
+				},
+				{
+					Name:    "aliases",
+					Aliases: []string{"as"},
+					Usage:   "get aliases (optionally by index)",
+					Action: func(c *cli.Context) error {
+						index := ""
+						if c.Args().Get(0) != "" {
+							index = c.Args().Get(0)
+						}
+						query := cmdCat(c, port, "aliases", index)
+						fmt.Print(query + "\n")
+						fmt.Println(getRaw(query))
+						return nil
+					},
+				},
 			},
 		},
 	}

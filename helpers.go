@@ -97,6 +97,10 @@ func cmdCat(c *cli.Context, port string, subCmd string, index string) string {
 		arg = "/recovery/"
 	case "health":
 		arg = "/health/"
+	case "pending_tasks":
+		arg = "/pending_tasks/"
+	case "aliases":
+		arg = "/aliases/"
 	}
 	return url + port + route + arg + index + "?v"
 }
