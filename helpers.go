@@ -101,6 +101,12 @@ func cmdCat(c *cli.Context, port string, subCmd string, index string) string {
 		arg = "/pending_tasks/"
 	case "aliases":
 		arg = "/aliases/"
+	case "thread_pool":
+		arg = "/thread_pool/"
+	case "plugins":
+		arg = "/plugins/"
+	case "fielddata":
+		arg = "/fielddata/"
 	}
 	return url + port + route + arg + index + "?v"
 }

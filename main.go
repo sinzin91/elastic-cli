@@ -232,6 +232,45 @@ func main() {
 						return nil
 					},
 				},
+				{
+					Name:    "thread_pool",
+					Aliases: []string{"th"},
+					Usage:   "get thread_pool",
+					Action: func(c *cli.Context) error {
+						index := ""
+						query := cmdCat(c, port, "thread_pool", index)
+						fmt.Print(query + "\n")
+						fmt.Println(getRaw(query))
+						return nil
+					},
+				},
+				{
+					Name:    "plugins",
+					Aliases: []string{"pl"},
+					Usage:   "get plugins",
+					Action: func(c *cli.Context) error {
+						index := ""
+						query := cmdCat(c, port, "plugins", index)
+						fmt.Print(query + "\n")
+						fmt.Println(getRaw(query))
+						return nil
+					},
+				},
+				{
+					Name:    "fielddata",
+					Aliases: []string{"f"},
+					Usage:   "get fielddata (optionally by index)",
+					Action: func(c *cli.Context) error {
+						index := ""
+						if c.Args().Get(0) != "" {
+							index = c.Args().Get(0)
+						}
+						query := cmdCat(c, port, "fielddata", index)
+						fmt.Print(query + "\n")
+						fmt.Println(getRaw(query))
+						return nil
+					},
+				},
 			},
 		},
 	}
