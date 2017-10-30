@@ -3,7 +3,7 @@ A command-line interface for Elasticsearch
 
 ## Installation
 
-The following installs the program given Go is installed and `$GOPATH` is set:
+The following installs the program given Go is [installed](https://golang.org/doc/install) and `$GOPATH` is set:
 ```
 go get -u github.com/sinzin91/elastic-cli
 ```
@@ -16,7 +16,7 @@ mv `which elastic-cli` $GOPATH/bin/es
 
 ## Usage
 ```
-❯ elastic-cli                                                  ✹
+❯ elastic-cli                                                  
 NAME:
    elastic-cli - A Robust CLI for Elasticsearch
 
