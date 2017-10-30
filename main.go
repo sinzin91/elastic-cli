@@ -12,13 +12,12 @@ func main() {
 	var port string
 
 	app := cli.NewApp()
-
+	app.Name = "elastic-cli"
+	app.Usage = "A Robust CLI for Elasticsearch"
+	app.Version = "1.0.0"
+	app.Author = "Tenzin Wangdhen"
+	app.Email = "sinzin91@gmail.com"
 	app.Flags = []cli.Flag{
-		cli.StringFlag{
-			Name:  "lang",
-			Value: "english",
-			Usage: "language for the greeting",
-		},
 		cli.StringFlag{
 			Name:  "baseurl",
 			Value: "http://localhost:",
@@ -33,23 +32,6 @@ func main() {
 	}
 
 	app.Commands = []cli.Command{
-		{
-			Name:    "greet",
-			Aliases: []string{"g"},
-			Usage:   "greet user",
-			Action: func(c *cli.Context) error {
-				name := "Nefertiti"
-				if c.NArg() > 0 {
-					name = c.Args().Get(0)
-				}
-				if c.String("lang") == "spanish" {
-					fmt.Println("Hola", name)
-				} else {
-					fmt.Println("Hello", name)
-				}
-				return nil
-			},
-		},
 		{
 			Name:      "query",
 			ShortName: "q",
