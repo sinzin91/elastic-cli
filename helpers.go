@@ -75,6 +75,8 @@ func cmdCluster(c *cli.Context, port string, subCmd string) string {
 		arg = "/state"
 	case "stats":
 		arg = "/stats"
+	case "settings":
+		arg = "/settings"
 	default:
 		arg = ""
 	}
@@ -123,4 +125,23 @@ func cmdQuery(c *cli.Context, port string) string {
 	route := c.Args().First()
 	url := c.GlobalString("baseurl")
 	return url + port + route
+}
+
+func cmdNodes(c *cli.Context, port string, subCmd string) string {
+	route := "/_nodes/"
+	url := c.GlobalString("baseurl")
+	
+	nodes := ""
+	if c.Args().Get(0) != "" {
+		nodes = c.Args().Get(0)
+	}
+	
+	var cmd string
+	switch subCmd {
+	case "stats":
+		cmd = "/stats"
+	default:
+		cmd = ""
+	}
+	return url + port + route + nodes + cmd
 }

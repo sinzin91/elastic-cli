@@ -69,6 +69,28 @@ func main() {
 			},
 		},
 		{
+			Name:      "nodes",
+			ShortName: "n",
+			Usage:     "Get node information",
+			Action: func(c *cli.Context) {
+				query := cmdNodes(c, port, "")
+				fmt.Println(query)
+				fmt.Println(getJSON(query))
+			},
+			Subcommands: []cli.Command{
+				{
+					Name:    "stats",
+					Aliases: []string{"s"},
+					Usage:   "get node stats",
+					Action: func(c *cli.Context) {
+						query := cmdNodes(c, port, "stats")
+						fmt.Println(query)
+						fmt.Println(getJSON(query))
+					},
+				},
+			},
+		},
+		{
 			Name:      "cluster",
 			ShortName: "cl",
 			Usage:     "Get cluster information",
@@ -101,6 +123,17 @@ func main() {
 					Usage:   "get cluster stats",
 					Action: func(c *cli.Context) error {
 						query := cmdCluster(c, port, "stats")
+						fmt.Println(query)
+						fmt.Println(getJSON(query))
+						return nil
+					},
+				},
+				{
+					Name:    "settings",
+					Aliases: []string{"se"},
+					Usage:   "get cluster settings",
+					Action: func(c *cli.Context) error {
+						query := cmdCluster(c, port, "settings")
 						fmt.Println(query)
 						fmt.Println(getJSON(query))
 						return nil
