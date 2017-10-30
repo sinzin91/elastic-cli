@@ -95,6 +95,17 @@ func main() {
 						return nil
 					},
 				},
+				{
+					Name:    "stats",
+					Aliases: []string{"st"},
+					Usage:   "get cluster stats",
+					Action: func(c *cli.Context) error {
+						query := cmdCluster(c, port, "stats")
+						fmt.Println(query)
+						fmt.Println(getJSON(query))
+						return nil
+					},
+				},
 			},
 		},
 		{

@@ -73,6 +73,8 @@ func cmdCluster(c *cli.Context, port string, subCmd string) string {
 		arg = "/health"
 	case "state":
 		arg = "/state"
+	case "stats":
+		arg = "/stats"
 	default:
 		arg = ""
 	}
