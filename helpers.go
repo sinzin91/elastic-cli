@@ -83,9 +83,14 @@ func cmdCluster(c *cli.Context, port string, subCmd string) string {
 	return url + port + route + arg
 }
 
-func cmdCat(c *cli.Context, port string, subCmd string, index string) string {
+func cmdCat(c *cli.Context, port string, subCmd string) string {
 	route := "/_cat"
 	url := c.GlobalString("baseurl")
+	
+	index := ""
+	if c.Args().Get(0) != "" {
+		index = c.Args().Get(0)
+	}
 
 	var arg string
 	switch subCmd {

@@ -133,7 +133,7 @@ func main() {
 					Aliases: []string{"al"},
 					Usage:   "get allocation",
 					Action: func(c *cli.Context) error {
-						query := cmdCat(c, port, "allocation", "")
+						query := cmdCat(c, port, "allocation")
 						fmt.Print(query + "\n")
 						fmt.Println(getRaw(query))
 						return nil
@@ -144,11 +144,7 @@ func main() {
 					Aliases: []string{"sh"},
 					Usage:   "get shards (optionally by index)",
 					Action: func(c *cli.Context) error {
-						index := ""
-						if c.Args().Get(0) != "" {
-							index = c.Args().Get(0)
-						}
-						query := cmdCat(c, port, "shards", index)
+						query := cmdCat(c, port, "shards")
 						fmt.Print(query + "\n")
 						fmt.Println(getRaw(query))
 						return nil
@@ -159,8 +155,7 @@ func main() {
 					Aliases: []string{"m"},
 					Usage:   "get master",
 					Action: func(c *cli.Context) error {
-						index := ""
-						query := cmdCat(c, port, "master", index)
+						query := cmdCat(c, port, "master")
 						fmt.Print(query + "\n")
 						fmt.Println(getRaw(query))
 						return nil
@@ -171,8 +166,7 @@ func main() {
 					Aliases: []string{"n"},
 					Usage:   "get nodes",
 					Action: func(c *cli.Context) error {
-						index := ""
-						query := cmdCat(c, port, "nodes", index)
+						query := cmdCat(c, port, "nodes")
 						fmt.Print(query + "\n")
 						fmt.Println(getRaw(query))
 						return nil
@@ -183,11 +177,7 @@ func main() {
 					Aliases: []string{"i"},
 					Usage:   "get indices (optionally by index)",
 					Action: func(c *cli.Context) error {
-						index := ""
-						if c.Args().Get(0) != "" {
-							index = c.Args().Get(0)
-						}
-						query := cmdCat(c, port, "indices", index)
+						query := cmdCat(c, port, "indices")
 						fmt.Print(query + "\n")
 						fmt.Println(getRaw(query))
 						return nil
@@ -198,11 +188,7 @@ func main() {
 					Aliases: []string{"s"},
 					Usage:   "get segments (optionally by index)",
 					Action: func(c *cli.Context) error {
-						index := ""
-						if c.Args().Get(0) != "" {
-							index = c.Args().Get(0)
-						}
-						query := cmdCat(c, port, "segments", index)
+						query := cmdCat(c, port, "segments")
 						fmt.Print(query + "\n")
 						fmt.Println(getRaw(query))
 						return nil
@@ -213,11 +199,7 @@ func main() {
 					Aliases: []string{"c"},
 					Usage:   "get count (optionally by index)",
 					Action: func(c *cli.Context) error {
-						index := ""
-						if c.Args().Get(0) != "" {
-							index = c.Args().Get(0)
-						}
-						query := cmdCat(c, port, "count", index)
+						query := cmdCat(c, port, "count")
 						fmt.Print(query + "\n")
 						fmt.Println(getRaw(query))
 						return nil
@@ -228,11 +210,7 @@ func main() {
 					Aliases: []string{"r"},
 					Usage:   "get recovery (optionally by index)",
 					Action: func(c *cli.Context) error {
-						index := ""
-						if c.Args().Get(0) != "" {
-							index = c.Args().Get(0)
-						}
-						query := cmdCat(c, port, "recovery", index)
+						query := cmdCat(c, port, "recovery")
 						fmt.Print(query + "\n")
 						fmt.Println(getRaw(query))
 						return nil
@@ -243,8 +221,7 @@ func main() {
 					Aliases: []string{"he"},
 					Usage:   "get health",
 					Action: func(c *cli.Context) error {
-						index := ""
-						query := cmdCat(c, port, "health", index)
+						query := cmdCat(c, port, "health")
 						fmt.Print(query + "\n")
 						fmt.Println(getRaw(query))
 						return nil
@@ -255,8 +232,7 @@ func main() {
 					Aliases: []string{"pt"},
 					Usage:   "get pending_tasks",
 					Action: func(c *cli.Context) error {
-						index := ""
-						query := cmdCat(c, port, "pending_tasks", index)
+						query := cmdCat(c, port, "pending_tasks")
 						fmt.Print(query + "\n")
 						fmt.Println(getRaw(query))
 						return nil
@@ -267,11 +243,7 @@ func main() {
 					Aliases: []string{"as"},
 					Usage:   "get aliases (optionally by index)",
 					Action: func(c *cli.Context) error {
-						index := ""
-						if c.Args().Get(0) != "" {
-							index = c.Args().Get(0)
-						}
-						query := cmdCat(c, port, "aliases", index)
+						query := cmdCat(c, port, "aliases")
 						fmt.Print(query + "\n")
 						fmt.Println(getRaw(query))
 						return nil
@@ -282,8 +254,7 @@ func main() {
 					Aliases: []string{"th"},
 					Usage:   "get thread_pool",
 					Action: func(c *cli.Context) error {
-						index := ""
-						query := cmdCat(c, port, "thread_pool", index)
+						query := cmdCat(c, port, "thread_pool")
 						fmt.Print(query + "\n")
 						fmt.Println(getRaw(query))
 						return nil
@@ -294,8 +265,7 @@ func main() {
 					Aliases: []string{"pl"},
 					Usage:   "get plugins",
 					Action: func(c *cli.Context) error {
-						index := ""
-						query := cmdCat(c, port, "plugins", index)
+						query := cmdCat(c, port, "plugins")
 						fmt.Print(query + "\n")
 						fmt.Println(getRaw(query))
 						return nil
@@ -306,11 +276,7 @@ func main() {
 					Aliases: []string{"f"},
 					Usage:   "get fielddata (optionally by index)",
 					Action: func(c *cli.Context) error {
-						index := ""
-						if c.Args().Get(0) != "" {
-							index = c.Args().Get(0)
-						}
-						query := cmdCat(c, port, "fielddata", index)
+						query := cmdCat(c, port, "fielddata")
 						fmt.Print(query + "\n")
 						fmt.Println(getRaw(query))
 						return nil
