@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"strings"
 
 	"github.com/urfave/cli"
 )
@@ -47,6 +48,24 @@ func main() {
 					fmt.Println("Hello", name)
 				}
 				return nil
+			},
+		},
+		{
+			Name:      "query",
+			ShortName: "q",
+			Usage:     "Perform any ES API GET query",
+			Action: func(c *cli.Context) {
+				var out string
+				var err error
+				if strings.Contains(c.Args().First(), "_cat/") {
+					out, err = getRaw(cmdQuery(c, port))
+				} else {
+					out, err = getJSON(cmdQuery(c, port))
+				}
+				if err != nil {
+					fatal(err)
+				}
+				fmt.Println(out)
 			},
 		},
 		{

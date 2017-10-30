@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"errors"
   "fmt"
+	"os"
 	"io/ioutil"
 	"mime"
 	"net/http"
@@ -11,6 +12,11 @@ import (
 	prettyjson "github.com/hokaccha/go-prettyjson"
 	"github.com/urfave/cli"
 )
+
+func fatal(err error) {
+	fmt.Fprintln(os.Stderr, err)
+	os.Exit(1)
+}
 
 func getJSON(route string) (string, error) {
 	r, err := http.Get(route)
@@ -109,4 +115,10 @@ func cmdCat(c *cli.Context, port string, subCmd string, index string) string {
 		arg = "/fielddata/"
 	}
 	return url + port + route + arg + index + "?v"
+}
+
+func cmdQuery(c *cli.Context, port string) string {
+	route := c.Args().First()
+	url := c.GlobalString("baseurl")
+	return url + port + route
 }
