@@ -134,6 +134,18 @@ func cmdQuery(c *cli.Context, port string) string {
 	return url + port + route
 }
 
+func cmdSearchShards(c *cli.Context, port string) string {
+	route := "/_search_shards"
+	url := c.GlobalString("baseurl")
+
+	index := ""
+	if c.Args().Get(0) != "" {
+		index = "/" + c.Args().Get(0)
+	}
+
+	return url + port + index + route
+}
+
 func cmdTasks(c *cli.Context, port string) string {
 	route := "/_tasks/"
 	url := c.GlobalString("baseurl")

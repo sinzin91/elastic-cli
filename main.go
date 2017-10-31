@@ -53,9 +53,19 @@ func main() {
 		{
 			Name:      "tasks",
 			ShortName: "t",
-			Usage:     "Perform any ES API GET tasks",
+			Usage:     "get tasks",
 			Action: func(c *cli.Context) {
 				query := cmdTasks(c, port)
+				fmt.Println(query)
+				fmt.Println(getJSON(query))
+			},
+		},
+		{
+			Name:      "search_shards",
+			ShortName: "sh",
+			Usage:     "get search_shards",
+			Action: func(c *cli.Context) {
+				query := cmdSearchShards(c, port)
 				fmt.Println(query)
 				fmt.Println(getJSON(query))
 			},
