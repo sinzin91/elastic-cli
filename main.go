@@ -80,6 +80,16 @@ func main() {
 						fmt.Println(getJSON(query))
 					},
 				},
+				{
+					Name:    "hot_threads",
+					Aliases: []string{"h"},
+					Usage:   "get hot_threads (optionally by node)",
+					Action: func(c *cli.Context) {
+						query := cmdNodes(c, port, "hot_threads")
+						fmt.Println(query)
+						fmt.Println(getRaw(query))
+					},
+				},
 			},
 		},
 		{

@@ -159,6 +159,8 @@ func cmdNodes(c *cli.Context, port string, subCmd string) string {
 	switch subCmd {
 	case "stats":
 		cmd = "/stats"
+	case "hot_threads":
+		cmd = "/hot_threads"
 	default:
 		cmd = ""
 	}
