@@ -45,7 +45,7 @@ GLOBAL OPTIONS:
 
 ## Examples
 
-Cat nodes
+### Cat nodes
 ```
 ❯ elastic-cli --port "6666" c nodes
 http://localhost:6666/_cat/nodes?v
@@ -58,7 +58,7 @@ ip-10-0-1.555.ec2.internal 10.0.1.555           15          33 0.00 -         - 
 ip-10-0-1.555.ec2.internal 10.0.1.555           11          54 1.58 d         -      esd3
 ```
 
-Stats for specific node
+### Stats for specific node
 ```
 ❯ elastic-cli nodes stats esd2
 http://localhost:9200/_nodes/esd2/stats
@@ -74,7 +74,7 @@ http://localhost:9200/_nodes/esd2/stats
       ...
 ```
 
-Query
+### Query
 ```
 ❯ elastic-cli q '/twitter/user/test_user'
 {
