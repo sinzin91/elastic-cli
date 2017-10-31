@@ -3,12 +3,12 @@ package main
 import (
 	"encoding/json"
 	"errors"
-  "fmt"
-	"os"
+	"fmt"
 	"io/ioutil"
 	"mime"
 	"net/http"
-	
+	"os"
+
 	prettyjson "github.com/hokaccha/go-prettyjson"
 	"github.com/urfave/cli"
 )
@@ -86,7 +86,7 @@ func cmdCluster(c *cli.Context, port string, subCmd string) string {
 func cmdCat(c *cli.Context, port string, subCmd string) string {
 	route := "/_cat"
 	url := c.GlobalString("baseurl")
-	
+
 	index := ""
 	if c.Args().Get(0) != "" {
 		index = c.Args().Get(0)
@@ -122,6 +122,8 @@ func cmdCat(c *cli.Context, port string, subCmd string) string {
 		arg = "/plugins/"
 	case "fielddata":
 		arg = "/fielddata/"
+	case "tasks":
+		arg = "/tasks/"
 	}
 	return url + port + route + arg + index + "?v"
 }
@@ -132,15 +134,27 @@ func cmdQuery(c *cli.Context, port string) string {
 	return url + port + route
 }
 
+func cmdTasks(c *cli.Context, port string) string {
+	route := "/_tasks/"
+	url := c.GlobalString("baseurl")
+
+	param := ""
+	if c.Args().Get(0) != "" {
+		param = c.Args().Get(0)
+	}
+
+	return url + port + route + param
+}
+
 func cmdNodes(c *cli.Context, port string, subCmd string) string {
 	route := "/_nodes/"
 	url := c.GlobalString("baseurl")
-	
+
 	nodes := ""
 	if c.Args().Get(0) != "" {
 		nodes = c.Args().Get(0)
 	}
-	
+
 	var cmd string
 	switch subCmd {
 	case "stats":

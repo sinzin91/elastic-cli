@@ -51,6 +51,16 @@ func main() {
 			},
 		},
 		{
+			Name:      "tasks",
+			ShortName: "t",
+			Usage:     "Perform any ES API GET tasks",
+			Action: func(c *cli.Context) {
+				query := cmdTasks(c, port)
+				fmt.Println(query)
+				fmt.Println(getJSON(query))
+			},
+		},
+		{
 			Name:      "nodes",
 			ShortName: "n",
 			Usage:     "Get node information",
@@ -277,6 +287,17 @@ func main() {
 					Usage:   "get fielddata (optionally by index)",
 					Action: func(c *cli.Context) error {
 						query := cmdCat(c, port, "fielddata")
+						fmt.Print(query + "\n")
+						fmt.Println(getRaw(query))
+						return nil
+					},
+				},
+				{
+					Name:    "tasks",
+					Aliases: []string{"t"},
+					Usage:   "get tasks",
+					Action: func(c *cli.Context) error {
+						query := cmdCat(c, port, "tasks")
 						fmt.Print(query + "\n")
 						fmt.Println(getRaw(query))
 						return nil
