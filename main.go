@@ -81,6 +81,16 @@ func main() {
 			},
 		},
 		{
+			Name:      "settings",
+			ShortName: "se",
+			Usage:     "get settings (optionally by index)",
+			Action: func(c *cli.Context) {
+				query := cmdGeneric(c, port, "/_settings")
+				fmt.Println(query)
+				fmt.Println(getJSON(query))
+			},
+		},
+		{
 			Name:      "nodes",
 			ShortName: "n",
 			Usage:     "Get node information",
