@@ -142,7 +142,12 @@ func cmdGeneric(c *cli.Context, port string, route string) string {
 		index = "/" + c.Args().Get(0)
 	}
 
-	return url + port + index + route
+	params := ""
+	if c.Args().Get(1) != "" {
+		params = c.Args().Get(1)
+	}
+
+	return url + port + index + route + params
 }
 
 func cmdTasks(c *cli.Context, port string) string {

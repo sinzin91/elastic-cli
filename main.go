@@ -53,7 +53,7 @@ func main() {
 		{
 			Name:      "tasks",
 			ShortName: "t",
-			Usage:     "get tasks",
+			Usage:     "Get tasks",
 			Action: func(c *cli.Context) {
 				query := cmdTasks(c, port)
 				fmt.Println(query)
@@ -63,7 +63,7 @@ func main() {
 		{
 			Name:      "search_shards",
 			ShortName: "sh",
-			Usage:     "get search_shards",
+			Usage:     "Get search_shards",
 			Action: func(c *cli.Context) {
 				query := cmdGeneric(c, port, "/_search_shards")
 				fmt.Println(query)
@@ -73,7 +73,7 @@ func main() {
 		{
 			Name:      "recovery",
 			ShortName: "re",
-			Usage:     "get recovery",
+			Usage:     "Get recovery",
 			Action: func(c *cli.Context) {
 				query := cmdGeneric(c, port, "/_recovery")
 				fmt.Println(query)
@@ -83,9 +83,19 @@ func main() {
 		{
 			Name:      "settings",
 			ShortName: "se",
-			Usage:     "get settings (optionally by index)",
+			Usage:     "Get index settings",
 			Action: func(c *cli.Context) {
 				query := cmdGeneric(c, port, "/_settings")
+				fmt.Println(query)
+				fmt.Println(getJSON(query))
+			},
+		},
+		{
+			Name:      "stats",
+			ShortName: "st",
+			Usage:     "Get index stats",
+			Action: func(c *cli.Context) {
+				query := cmdGeneric(c, port, "/_stats/")
 				fmt.Println(query)
 				fmt.Println(getJSON(query))
 			},
@@ -103,7 +113,7 @@ func main() {
 				{
 					Name:    "stats",
 					Aliases: []string{"s"},
-					Usage:   "get node stats",
+					Usage:   "Get node stats",
 					Action: func(c *cli.Context) {
 						query := cmdNodes(c, port, "stats")
 						fmt.Println(query)
@@ -113,7 +123,7 @@ func main() {
 				{
 					Name:    "hot_threads",
 					Aliases: []string{"h"},
-					Usage:   "get hot_threads (optionally by node)",
+					Usage:   "Get hot_threads (optionally by node)",
 					Action: func(c *cli.Context) {
 						query := cmdNodes(c, port, "hot_threads")
 						fmt.Println(query)
@@ -130,7 +140,7 @@ func main() {
 				{
 					Name:    "health",
 					Aliases: []string{"he"},
-					Usage:   "get cluster health",
+					Usage:   "Get cluster health",
 					Action: func(c *cli.Context) error {
 						query := cmdCluster(c, port, "health")
 						fmt.Println(query)
@@ -141,7 +151,7 @@ func main() {
 				{
 					Name:    "state",
 					Aliases: []string{"s"},
-					Usage:   "get cluster state",
+					Usage:   "Get cluster state",
 					Action: func(c *cli.Context) error {
 						query := cmdCluster(c, port, "state")
 						fmt.Println(query)
@@ -152,7 +162,7 @@ func main() {
 				{
 					Name:    "stats",
 					Aliases: []string{"st"},
-					Usage:   "get cluster stats",
+					Usage:   "Get cluster stats",
 					Action: func(c *cli.Context) error {
 						query := cmdCluster(c, port, "stats")
 						fmt.Println(query)
@@ -163,7 +173,7 @@ func main() {
 				{
 					Name:    "settings",
 					Aliases: []string{"se"},
-					Usage:   "get cluster settings",
+					Usage:   "Get cluster settings",
 					Action: func(c *cli.Context) error {
 						query := cmdCluster(c, port, "settings")
 						fmt.Println(query)
@@ -181,7 +191,7 @@ func main() {
 				{
 					Name:    "allocation",
 					Aliases: []string{"al"},
-					Usage:   "get allocation",
+					Usage:   "Get allocation",
 					Action: func(c *cli.Context) error {
 						query := cmdCat(c, port, "allocation")
 						fmt.Print(query + "\n")
@@ -192,7 +202,7 @@ func main() {
 				{
 					Name:    "shards",
 					Aliases: []string{"sh"},
-					Usage:   "get shards (optionally by index)",
+					Usage:   "Get shards (optionally by index)",
 					Action: func(c *cli.Context) error {
 						query := cmdCat(c, port, "shards")
 						fmt.Print(query + "\n")
@@ -203,7 +213,7 @@ func main() {
 				{
 					Name:    "master",
 					Aliases: []string{"m"},
-					Usage:   "get master",
+					Usage:   "Get master",
 					Action: func(c *cli.Context) error {
 						query := cmdCat(c, port, "master")
 						fmt.Print(query + "\n")
@@ -214,7 +224,7 @@ func main() {
 				{
 					Name:    "nodes",
 					Aliases: []string{"n"},
-					Usage:   "get nodes",
+					Usage:   "Get nodes",
 					Action: func(c *cli.Context) error {
 						query := cmdCat(c, port, "nodes")
 						fmt.Print(query + "\n")
@@ -225,7 +235,7 @@ func main() {
 				{
 					Name:    "indices",
 					Aliases: []string{"i"},
-					Usage:   "get indices (optionally by index)",
+					Usage:   "Get indices (optionally by index)",
 					Action: func(c *cli.Context) error {
 						query := cmdCat(c, port, "indices")
 						fmt.Print(query + "\n")
@@ -236,7 +246,7 @@ func main() {
 				{
 					Name:    "segments",
 					Aliases: []string{"s"},
-					Usage:   "get segments (optionally by index)",
+					Usage:   "Get segments (optionally by index)",
 					Action: func(c *cli.Context) error {
 						query := cmdCat(c, port, "segments")
 						fmt.Print(query + "\n")
@@ -247,7 +257,7 @@ func main() {
 				{
 					Name:    "count",
 					Aliases: []string{"c"},
-					Usage:   "get count (optionally by index)",
+					Usage:   "Get count (optionally by index)",
 					Action: func(c *cli.Context) error {
 						query := cmdCat(c, port, "count")
 						fmt.Print(query + "\n")
@@ -258,7 +268,7 @@ func main() {
 				{
 					Name:    "recovery",
 					Aliases: []string{"r"},
-					Usage:   "get recovery (optionally by index)",
+					Usage:   "Get recovery (optionally by index)",
 					Action: func(c *cli.Context) error {
 						query := cmdCat(c, port, "recovery")
 						fmt.Print(query + "\n")
@@ -269,7 +279,7 @@ func main() {
 				{
 					Name:    "health",
 					Aliases: []string{"he"},
-					Usage:   "get health",
+					Usage:   "Get health",
 					Action: func(c *cli.Context) error {
 						query := cmdCat(c, port, "health")
 						fmt.Print(query + "\n")
@@ -280,7 +290,7 @@ func main() {
 				{
 					Name:    "pending_tasks",
 					Aliases: []string{"pt"},
-					Usage:   "get pending_tasks",
+					Usage:   "Get pending_tasks",
 					Action: func(c *cli.Context) error {
 						query := cmdCat(c, port, "pending_tasks")
 						fmt.Print(query + "\n")
@@ -291,7 +301,7 @@ func main() {
 				{
 					Name:    "aliases",
 					Aliases: []string{"as"},
-					Usage:   "get aliases (optionally by index)",
+					Usage:   "Get aliases (optionally by index)",
 					Action: func(c *cli.Context) error {
 						query := cmdCat(c, port, "aliases")
 						fmt.Print(query + "\n")
@@ -302,7 +312,7 @@ func main() {
 				{
 					Name:    "thread_pool",
 					Aliases: []string{"th"},
-					Usage:   "get thread_pool",
+					Usage:   "Get thread_pool",
 					Action: func(c *cli.Context) error {
 						query := cmdCat(c, port, "thread_pool")
 						fmt.Print(query + "\n")
@@ -313,7 +323,7 @@ func main() {
 				{
 					Name:    "plugins",
 					Aliases: []string{"pl"},
-					Usage:   "get plugins",
+					Usage:   "Get plugins",
 					Action: func(c *cli.Context) error {
 						query := cmdCat(c, port, "plugins")
 						fmt.Print(query + "\n")
@@ -324,7 +334,7 @@ func main() {
 				{
 					Name:    "fielddata",
 					Aliases: []string{"f"},
-					Usage:   "get fielddata (optionally by index)",
+					Usage:   "Get fielddata (optionally by index)",
 					Action: func(c *cli.Context) error {
 						query := cmdCat(c, port, "fielddata")
 						fmt.Print(query + "\n")
@@ -335,7 +345,7 @@ func main() {
 				{
 					Name:    "tasks",
 					Aliases: []string{"t"},
-					Usage:   "get tasks",
+					Usage:   "Get tasks",
 					Action: func(c *cli.Context) error {
 						query := cmdCat(c, port, "tasks")
 						fmt.Print(query + "\n")
