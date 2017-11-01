@@ -134,8 +134,7 @@ func cmdQuery(c *cli.Context, port string) string {
 	return url + port + route
 }
 
-func cmdSearchShards(c *cli.Context, port string) string {
-	route := "/_search_shards"
+func cmdGeneric(c *cli.Context, port string, route string) string {
 	url := c.GlobalString("baseurl")
 
 	index := ""

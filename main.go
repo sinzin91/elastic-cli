@@ -65,7 +65,17 @@ func main() {
 			ShortName: "sh",
 			Usage:     "get search_shards",
 			Action: func(c *cli.Context) {
-				query := cmdSearchShards(c, port)
+				query := cmdGeneric(c, port, "/_search_shards")
+				fmt.Println(query)
+				fmt.Println(getJSON(query))
+			},
+		},
+		{
+			Name:      "recovery",
+			ShortName: "re",
+			Usage:     "get recovery",
+			Action: func(c *cli.Context) {
+				query := cmdGeneric(c, port, "/_recovery")
 				fmt.Println(query)
 				fmt.Println(getJSON(query))
 			},
