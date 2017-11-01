@@ -30,11 +30,16 @@ AUTHOR:
    Tenzin Wangdhen <sinzin91@gmail.com>
 
 COMMANDS:
-     query, q     Perform any ES API GET query
-     nodes, n     Get node information
-     cluster, cl  Get cluster information
-     cat, c       Call cat API
-     help, h      Shows a list of commands or help for one command
+     cat, c             Call cat API
+     cluster, cl        Get cluster information
+     nodes, n           Get node information
+     query, q           Perform any ES API GET query
+     recovery, re       Get recovery
+     search_shards, sh  Get search_shards
+     settings, se       Get index settings
+     stats, st          Get index stats
+     tasks, t           Get tasks
+     help, h            Shows a list of commands or help for one command
 
 GLOBAL OPTIONS:
    --baseurl value  Base API URL (default: "http://localhost:")
